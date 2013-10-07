@@ -119,6 +119,19 @@ public class Ambulances_ADD {
 	  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
   }
   
+  //return the index of the nearest hospital from position "int[] pos"
+  static int findNearstHospital(int[] pos){
+		int bestDist = Integer.MAX_VALUE, bestHospitalIndex = 0;
+		for(int k = 0; k < hospitals_start.length; k++){
+			int dist = gridDistance(pos, hospitals[k]);
+			if( bestDist > dist){
+				bestDist = dist;
+				bestHospitalIndex = k;
+			}
+		}
+		return bestHospitalIndex;
+  }
+  
   private static void runAnt(){
 	
 	int bestScore = 0;
@@ -129,28 +142,36 @@ public class Ambulances_ADD {
 	//find the nearest hospital for each victim
 	int[][] nearestHospitals = new int[MAX_NUMBER_VICTIMS][2];
 	for (int j = 0; j < numberOfVictims; j++) {
-		int bestDist = 100000, bestHospitalIndex = 0;
-		for(int k = 0; k < hospitals_start.length; k++){
-			int dist = gridDistance(victims[j], hospitals[k]);
-			if( bestDist > dist){
-				bestDist = dist;
-				bestHospitalIndex = k;
-			}
-		}
+		int bestHospitalIndex = findNearstHospital(victims[j]);
 		nearestHospitals[j] = hospitals[bestHospitalIndex];
 	}
 	
 	for (int i = 0; i < ANTCOL_ITERATIONS; i++) {
 		
-		int[] pos = hospitals[random.nextInt(5)];
+		int[] currentPos = hospitals[random.nextInt(5)];
 		boolean[] saved = new boolean[numberOfVictims];
-		int time = 0;
-		for (int j = 0; j < numberOfVictims; j++) {
-			int[] nearstH = nearestHospitals[j];
-			int dist = gridDistance(pos,victims[j]) + gridDistance(victims[j], nearstH);
-			if( !saved[j] && ( time +  dist + 2) >= victims[j][2] ){
-				
+		int totalTime = 0;
+		int[] possibleNodes = new int[numberOfVictims * 20];
+		int numPossibleNodes = 0;
+		int firstToDie = Integer.MAX_VALUE;
+		
+		
+		while(totalTime + gridDistance(currentPos, hospitals[findNearstHospital(currentPos)]) + 1 >= firstToDie ){
+			
+			for (int j = 0; j < numberOfVictims; j++) {
+				int[] nearstH = nearestHospitals[j];
+				int dist = gridDistance(currentPos,victims[j]) + gridDistance(victims[j], nearstH);
+				numPossibleNodes = 0;
+				if( !saved[j] && ( totalTime +  dist + 2) >= victims[j][2] ){ // if ok
+					possibleNodes[numPossibleNodes++] = j;
+				}
 			}
+			
+			int nextNode = possibleNodes[random.nextInt(numPossibleNodes)]; //randomized choice
+			saved[nextNode] = true;
+			numPreviousSaves[nextNode]++; 
+			totalTime += gridDistance(currentPos,victims[nextNode]) + 1;
+			
 		}
 	}
   }
