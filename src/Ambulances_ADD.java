@@ -156,7 +156,7 @@ public class Ambulances_ADD {
 		int firstToDie = Integer.MAX_VALUE;
 		
 		
-		while(totalTime + gridDistance(currentPos, hospitals[findNearstHospital(currentPos)]) + 1 >= firstToDie ){
+		while(true){
 			
 			for (int j = 0; j < numberOfVictims; j++) {
 				int[] nearstH = nearestHospitals[j];
@@ -167,10 +167,16 @@ public class Ambulances_ADD {
 				}
 			}
 			
+			if(numPossibleNodes == 0){
+				break;
+			}
+			
 			int nextNode = possibleNodes[random.nextInt(numPossibleNodes)]; //randomized choice
 			saved[nextNode] = true;
 			numPreviousSaves[nextNode]++; 
 			totalTime += gridDistance(currentPos,victims[nextNode]) + 1;
+			
+			
 			
 		}
 	}
