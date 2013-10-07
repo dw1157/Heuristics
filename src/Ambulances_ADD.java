@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
@@ -113,6 +115,12 @@ public class Ambulances_ADD {
 		  Edge p = (Edge) o;
 		  return ( x == p.x && y == p.y && z == p.z && w == p.w );
 	  }
+	  
+	public Edge(int[] a, int[] b) {
+		x = a[0]; y = a[1];
+		z = b[0]; w = b[1];
+	}
+	  
   }
   
   static int gridDistance(int[] a, int[] b){
@@ -138,6 +146,8 @@ public class Ambulances_ADD {
 	Random random = new Random();
 	HashMap<Edge, Integer> graph = new HashMap<Edge,Integer>();
 	int[] numPreviousSaves = new int[numberOfVictims]; 
+	ArrayList<ArrayList<Integer>> listNodes = new ArrayList<ArrayList<Integer>>(ANTCOL_ITERATIONS);  
+		
 	
 	//find the nearest hospital for each victim
 	int[][] nearestHospitals = new int[MAX_NUMBER_VICTIMS][2];
@@ -146,40 +156,62 @@ public class Ambulances_ADD {
 		nearestHospitals[j] = hospitals[bestHospitalIndex];
 	}
 	
-	for (int i = 0; i < ANTCOL_ITERATIONS; i++) {
+	for (int iteration = 0; iteration < ANTCOL_ITERATIONS; iteration++) {
 		
-		int[] currentPos = hospitals[random.nextInt(5)];
+		int[] currentPos = hospitals[random.nextInt(5)]; //TODO consider ambulance distribution
 		boolean[] saved = new boolean[numberOfVictims];
 		int totalTime = 0;
 		int[] possibleNodes = new int[numberOfVictims * 20];
-		int numPossibleNodes = 0;
+		
 		int firstToDie = Integer.MAX_VALUE;
+		listNodes.add(new ArrayList<Integer>());
 		
-		
+		boolean inHospital = true;
+		int totalOfVictimsInAmbulance = 0;
 		while(true){
-			
-			for (int j = 0; j < numberOfVictims; j++) {
+			int numPossibleNodes = 0;
+			for (int j = 0; j < numberOfVictims && totalOfVictimsInAmbulance < 4; j++) {
 				int[] nearstH = nearestHospitals[j];
 				int dist = gridDistance(currentPos,victims[j]) + gridDistance(victims[j], nearstH);
-				numPossibleNodes = 0;
-				if( !saved[j] && ( totalTime +  dist + 2) >= victims[j][2] ){ // if ok
+				if( !saved[j] && ( totalTime +  dist + 2) <= Math.min(firstToDie, victims[j][2]) ){
 					possibleNodes[numPossibleNodes++] = j;
 				}
 			}
 			
-			if(numPossibleNodes == 0){
-				break;
+			if( numPossibleNodes == 0 ){
+				
+				if( inHospital) break; // not possible to get any more victims
+				else {
+					inHospital = true;
+					totalOfVictimsInAmbulance = 0;
+					int[] nearestHospital = hospitals[ findNearstHospital(currentPos)];
+					totalTime += gridDistance(currentPos, nearestHospital);
+					totalTime += 1; //unloadVictims
+					currentPos = nearestHospital;
+
+				}
 			}
 			
 			int nextNode = possibleNodes[random.nextInt(numPossibleNodes)]; //randomized choice
 			saved[nextNode] = true;
-			numPreviousSaves[nextNode]++; 
+			firstToDie = Math.min(firstToDie, victims[nextNode][2]);
+			numPreviousSaves[nextNode]++;
 			totalTime += gridDistance(currentPos,victims[nextNode]) + 1;
-			
-			
-			
+			Edge e = new Edge(currentPos, victims[nextNode]);
+			if( !graph.containsKey(e)){
+				graph.put(e, 1);
+			} else {
+				graph.put(e, graph.get(e) + 1);
+			}
+			currentPos[0] = victims[nextNode][0];
+			currentPos[1] = victims[nextNode][1];
+			listNodes.get(iteration).add(nextNode);
+			inHospital = false;
+			totalOfVictimsInAmbulance++;
 		}
+		
 	}
+	bestScore = 0;
   }
   
   
@@ -198,15 +230,14 @@ public class Ambulances_ADD {
     scan.nextLine();
 
     String line;
-    int numOfPersons = 0;
     while (scan.hasNext() && !(line = scan.nextLine()).isEmpty()) {
       String[] pers_coord = line.split(",");
-      victims[numOfPersons][0] = Integer.parseInt(pers_coord[0]);
-      victims[numOfPersons][1] = Integer.parseInt(pers_coord[1]);
-      victims[numOfPersons][2] = Integer.parseInt(pers_coord[2]);
+      victims[numberOfVictims][0] = Integer.parseInt(pers_coord[0]);
+      victims[numberOfVictims][1] = Integer.parseInt(pers_coord[1]);
+      victims[numberOfVictims][2] = Integer.parseInt(pers_coord[2]);
       // if (max_x < victims[i][0]) max_x = victims[i][0];
       // if (max_y < victims[i][1]) max_y = victims[i][1];
-      numOfPersons++; 
+      numberOfVictims++; 
     }
 
     while ((line = scan.nextLine()).isEmpty()) {
