@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class Ambulances_ADD {
 
   private static final int NUM_KMEANS_TRIALS = 10000;
   private static final int ANTCOL_ITERATIONS = 100;
-  private static final int MAX_NUMBER_PERSONS = 300;
+  private static final int MAX_NUMBER_VICTIMS = 300;
   
-  private static int[][] victims = new int[MAX_NUMBER_PERSONS][3];
+  private static int[][] victims = new int[MAX_NUMBER_VICTIMS][3];
   private static int[] hospitals_start = new int[5];
-  private static int[][] nearstHospitals = new int[MAX_NUMBER_PERSONS][2];
-  \private static int[][] hospitals;
+  private static int[][] hospitals;
   private static int max_x = 100;
   private static int max_y = 100;
-  private static int numOfPersons = 0;
+  private static int numberOfVictims = 0;
   
   
   public static void main(String[] args) throws FileNotFoundException {
@@ -103,6 +103,8 @@ public class Ambulances_ADD {
 
   }
   
+  // =======ANT COLONIZATION==========//
+  
   static class Edge{
 	  int x, y; // origin
 	  int z, w; // destination
@@ -113,32 +115,48 @@ public class Ambulances_ADD {
 	  }
   }
   
+  static int gridDistance(int[] a, int[] b){
+	  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+  }
+  
   private static void runAnt(){
 	
 	int bestScore = 0;
 	Random random = new Random();
 	HashMap<Edge, Integer> graph = new HashMap<Edge,Integer>();
-	int[] numPreviousSaves = new int[numOfPersons]; 
+	int[] numPreviousSaves = new int[numberOfVictims]; 
+	
+	//find the nearest hospital for each victim
+	int[][] nearestHospitals = new int[MAX_NUMBER_VICTIMS][2];
+	for (int j = 0; j < numberOfVictims; j++) {
+		int bestDist = 100000, bestHospitalIndex = 0;
+		for(int k = 0; k < hospitals_start.length; k++){
+			int dist = gridDistance(victims[j], hospitals[k]);
+			if( bestDist > dist){
+				bestDist = dist;
+				bestHospitalIndex = k;
+			}
+		}
+		nearestHospitals[j] = hospitals[bestHospitalIndex];
+	}
 	
 	for (int i = 0; i < ANTCOL_ITERATIONS; i++) {
-		int x = hospitals[random.nextInt(5)][0];
-		int y = hospitals[random.nextInt(5)][1];
-		boolean[] saved = new boolean[numOfPersons];
+		
+		int[] pos = hospitals[random.nextInt(5)];
+		boolean[] saved = new boolean[numberOfVictims];
 		int time = 0;
-		for (int j = 0; j < numOfPersons; j++) {
-			int[] nearstH = nearstHospitals[j];
-			int dist = abs(x-victims[j][0]) +  abs(y-victims[j][1]) +  abs(nearstH[0]-victims[j][0]) +  abs(nearstH[1]-victims[j][1]);
+		for (int j = 0; j < numberOfVictims; j++) {
+			int[] nearstH = nearestHospitals[j];
+			int dist = gridDistance(pos,victims[j]) + gridDistance(victims[j], nearstH);
 			if( !saved[j] && ( time +  dist + 2) >= victims[j][2] ){
 				
 			}
 		}
 	}
-	  
   }
   
-  static int abs(int x){
-	  return Math.abs(x);
-  }
+  
+  //=======END ANT COLONIZATION==========//
   
   private static double distance(int[] point1, int[] point2) {
 
