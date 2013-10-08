@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class Ambulances_ADD {
 
   private static final int NUM_KMEANS_TRIALS = 10000;
-  private static final int ANTCOL_ITERATIONS = 1000;
+  private static final int ANTCOL_ITERATIONS = 10000;
   private static final int MAX_NUMBER_VICTIMS = 300;
-  private static final int MAX_NODES_FROM_CURRENT_POSITION = 10;
+  private static final int MAX_NODES_FROM_CURRENT_POSITION = 5;
   
   private static int[][] victims = new int[MAX_NUMBER_VICTIMS][3];
   private static int[] hospitals_start = new int[5];
@@ -100,9 +100,11 @@ public class Ambulances_ADD {
 
     System.out.println("Best score: " + best_score);
     
+    //printMap();
+    
     ArrayList<ArrayList<Integer>> paths = runAnt();
    
-    printMap();
+    
     System.out.println("");
     printOutput(paths);
     
@@ -150,7 +152,7 @@ public class Ambulances_ADD {
 	Random random = new Random();
 	HashMap<Edge, Integer> graph = new HashMap<Edge,Integer>();
 	int[] numPreviousSaves = new int[numberOfVictims]; 
-	int[] possibleNodes = new int[MAX_NODES_FROM_CURRENT_POSITION + 10];
+	int[][] possibleNodes = new int[MAX_NODES_FROM_CURRENT_POSITION + 10][2];
 	
 	  
 	ArrayList<ArrayList<Integer>> bestSolution = null;	// For each ambulance a list of victims 
@@ -160,7 +162,7 @@ public class Ambulances_ADD {
 	int[][] nearestHospitals = new int[MAX_NUMBER_VICTIMS][2];
 	for (int j = 0; j < numberOfVictims; j++) {
 		int bestHospitalIndex = findNearstHospital(victims[j]);
-		nearestHospitals[j] = hospitals[bestHospitalIndex];
+		nearestHospitals[j] = Arrays.copyOf(hospitals[bestHospitalIndex], hospitals.length);
 	}
 	
 	for (int iteration = 0; iteration < ANTCOL_ITERATIONS; iteration++) {	
@@ -171,13 +173,16 @@ public class Ambulances_ADD {
 		int totalIterationScore =0; //number of victims saved in this iteration
 		
 		for(int hospital = 0; hospital < hospitals_start.length; hospital++){
+			
+			
 			for(int ambulance = 0; ambulance < hospitals_start[hospital]; ambulance++){
 				boolean inHospital = true; // starts in hospital
+				int totalTime = 0;
 				int totalOfVictimsInAmbulance = 0;
 				listNodes.add(new ArrayList<Integer>());
 				
-				int[] currentPos = hospitals[hospital];
-				int totalTime = 0;
+				int[] currentPos = Arrays.copyOf(hospitals[hospital], 2) ;
+				
 				int firstToDie = Integer.MAX_VALUE; // The time the first victim inside the ambulance will die
 				
 				//find the path
@@ -189,12 +194,16 @@ public class Ambulances_ADD {
 						if( !saved[j] && ( totalTime +  dist + 2) <= Math.min(firstToDie, victims[j][2]) ){
 							// is a possible exploring node if it's relatively near current position
 							// using insertion sort
-							possibleNodes[numPossibleNodes] = j;
+							possibleNodes[numPossibleNodes][0] = j;
+							possibleNodes[numPossibleNodes][1] = dist;
 							for (int k = numPossibleNodes-1; k >= 0; k--) {
-								int dist2 = gridDistance(currentPos,victims[possibleNodes[k]]) + gridDistance(victims[possibleNodes[k]], nearstH);
+								//int dist2 = gridDistance(currentPos,victims[possibleNodes[k][0]]) + gridDistance(victims[possibleNodes[k][0]], nearestHospitals[k]);
+								int dist2 = possibleNodes[k][1];
 								if( dist < dist2 ){
-									possibleNodes[k+1] = possibleNodes[k];
-									possibleNodes[k] = j;
+									possibleNodes[k+1][0] = possibleNodes[k][0];
+									possibleNodes[k+1][1] = possibleNodes[k][1];
+									possibleNodes[k][0] = j;
+									possibleNodes[k][1] = dist;
 								} else {
 									break;
 								}
@@ -213,13 +222,13 @@ public class Ambulances_ADD {
 							totalTime += gridDistance(currentPos,hospitals[ nearestHospital]);
 							totalTime += 1; //unloadVictims
 							listNodes.get(ambulanceCount).add(-(nearestHospital+1)); // hospitals are stored with negative numbers and 1 based
-							currentPos = hospitals[nearestHospital];
+							currentPos = Arrays.copyOf(hospitals[nearestHospital],2);
 							firstToDie = Integer.MAX_VALUE;
 							continue;
 						}
 					}
 					
-					int nextNode = possibleNodes[random.nextInt(numPossibleNodes)]; //randomized choice
+					int nextNode = possibleNodes[random.nextInt(numPossibleNodes)][0]; //randomized choice
 					saved[nextNode] = true;
 					firstToDie = Math.min(firstToDie, victims[nextNode][2]);
 					numPreviousSaves[nextNode]++;
@@ -258,16 +267,20 @@ public class Ambulances_ADD {
   //=======END ANT COLONIZATION==========//
   
   private static void printOutput( ArrayList<ArrayList<Integer>> paths ){
-	  System.out.println("");
 	  int cont =0;
+	  System.out.print("hospitals");
+	  for (int h = 0; h < hospitals.length; h++) {
+	      System.out.print(" " + h + " (" + hospitals[h][0] + "," + hospitals[h][1]+ ");") ;
+	  }
+	  System.out.println("");
 	  for(ArrayList<Integer> ambulance : paths){
 		  System.out.print("Ambuance " + (cont++));
 		  for( int node : ambulance){
 			  if( node >=0 ){
-				  System.out.print( " " + node + " (" + victims[node][0] + "," + victims[node][1] + "," + victims[node][0] + ");" );
+				  System.out.print( " " + node + " (" + victims[node][0] + "," + victims[node][1] + "," + victims[node][2] + ");" );
 			  } else {
 				  int hospital = (node * (-1)) -1;
-				  System.out.print(" (" + hospitals[hospital][0] + "," + victims[hospital][1] + ");" );
+				  System.out.print(" (" + hospitals[hospital][0] + "," + hospitals[hospital][1] + ");" );
 			  }
 		  }
 		  System.out.println("");
@@ -307,30 +320,30 @@ public class Ambulances_ADD {
       i++;
     }
   }
-
+  
   private static void printMap() {
     for (int i = 0; i < max_x; i++) {
       for (int j = 0; j < max_y; j++) {
 
         boolean found = false;
         for (int h = 0; h < hospitals.length; h++) {
-          if (hospitals[h][0] == i && hospitals[h][1] == j) {
-            System.out.print("H");
+          if (hospitals[h][0] == j && hospitals[h][1] == i) {
+            System.out.print("H" + h + "\t");
             found = true;
             break;
           }
         }
         if (!found) {
           for (int k = 0; k < victims.length; k++) {
-            if (victims[k][0] == i && victims[k][1] == j) {
-              System.out.print("!");
+            if (victims[k][0] == j && victims[k][1] == i) {
+              System.out.print(k + "\t");
               found = true;
               break;
             }
           }
         }
         if (!found) {
-          System.out.print("_");
+          System.out.print("\t");
         }
       }
       System.out.println();
