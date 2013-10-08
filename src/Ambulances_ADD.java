@@ -10,8 +10,9 @@ import java.util.Scanner;
 public class Ambulances_ADD {
 
   private static final int NUM_KMEANS_TRIALS = 10000;
-  private static final int ANTCOL_ITERATIONS = 100;
+  private static final int ANTCOL_ITERATIONS = 1000;
   private static final int MAX_NUMBER_VICTIMS = 300;
+  private static final int MAX_NODES_FROM_CURRENT_POSITION = 10;
   
   private static int[][] victims = new int[MAX_NUMBER_VICTIMS][3];
   private static int[] hospitals_start = new int[5];
@@ -99,10 +100,12 @@ public class Ambulances_ADD {
 
     System.out.println("Best score: " + best_score);
     
-    runAnt();
-    
+    ArrayList<ArrayList<Integer>> paths = runAnt();
+   
     printMap();
-
+    System.out.println("");
+    printOutput(paths);
+    
   }
   
   // =======ANT COLONIZATION==========//
@@ -140,14 +143,18 @@ public class Ambulances_ADD {
 		return bestHospitalIndex;
   }
   
-  private static void runAnt(){
+  
+  private static ArrayList<ArrayList<Integer>> runAnt(){
 	
-	int bestScore = 0;
+	
 	Random random = new Random();
 	HashMap<Edge, Integer> graph = new HashMap<Edge,Integer>();
 	int[] numPreviousSaves = new int[numberOfVictims]; 
-	ArrayList<ArrayList<Integer>> listNodes = new ArrayList<ArrayList<Integer>>(ANTCOL_ITERATIONS);  
-		
+	int[] possibleNodes = new int[MAX_NODES_FROM_CURRENT_POSITION + 10];
+	
+	  
+	ArrayList<ArrayList<Integer>> bestSolution = null;	// For each ambulance a list of victims 
+	int bestScore = 0; // total number of victims saved
 	
 	//find the nearest hospital for each victim
 	int[][] nearestHospitals = new int[MAX_NUMBER_VICTIMS][2];
@@ -156,66 +163,116 @@ public class Ambulances_ADD {
 		nearestHospitals[j] = hospitals[bestHospitalIndex];
 	}
 	
-	for (int iteration = 0; iteration < ANTCOL_ITERATIONS; iteration++) {
+	for (int iteration = 0; iteration < ANTCOL_ITERATIONS; iteration++) {	
 		
-		int[] currentPos = hospitals[random.nextInt(5)]; //TODO consider ambulance distribution
 		boolean[] saved = new boolean[numberOfVictims];
-		int totalTime = 0;
-		int[] possibleNodes = new int[numberOfVictims * 20];
+		ArrayList<ArrayList<Integer>> listNodes = new ArrayList<ArrayList<Integer>>();
+		int ambulanceCount = 0;
+		int totalIterationScore =0; //number of victims saved in this iteration
 		
-		int firstToDie = Integer.MAX_VALUE;
-		listNodes.add(new ArrayList<Integer>());
-		
-		boolean inHospital = true;
-		int totalOfVictimsInAmbulance = 0;
-		while(true){
-			int numPossibleNodes = 0;
-			for (int j = 0; j < numberOfVictims && totalOfVictimsInAmbulance < 4; j++) {
-				int[] nearstH = nearestHospitals[j];
-				int dist = gridDistance(currentPos,victims[j]) + gridDistance(victims[j], nearstH);
-				if( !saved[j] && ( totalTime +  dist + 2) <= Math.min(firstToDie, victims[j][2]) ){
-					possibleNodes[numPossibleNodes++] = j;
-				}
-			}
-			
-			if( numPossibleNodes == 0 ){
+		for(int hospital = 0; hospital < hospitals_start.length; hospital++){
+			for(int ambulance = 0; ambulance < hospitals_start[hospital]; ambulance++){
+				boolean inHospital = true; // starts in hospital
+				int totalOfVictimsInAmbulance = 0;
+				listNodes.add(new ArrayList<Integer>());
 				
-				if( inHospital) break; // not possible to get any more victims
-				else {
-					inHospital = true;
-					totalOfVictimsInAmbulance = 0;
-					int[] nearestHospital = hospitals[ findNearstHospital(currentPos)];
-					totalTime += gridDistance(currentPos, nearestHospital);
-					totalTime += 1; //unloadVictims
-					currentPos = nearestHospital;
-
+				int[] currentPos = hospitals[hospital];
+				int totalTime = 0;
+				int firstToDie = Integer.MAX_VALUE; // The time the first victim inside the ambulance will die
+				
+				//find the path
+				while(true){ 
+					int numPossibleNodes = 0;
+					for (int j = 0; j < numberOfVictims && totalOfVictimsInAmbulance < 4; j++) {
+						int[] nearstH = nearestHospitals[j];
+						int dist = gridDistance(currentPos,victims[j]) + gridDistance(victims[j], nearstH);
+						if( !saved[j] && ( totalTime +  dist + 2) <= Math.min(firstToDie, victims[j][2]) ){
+							// is a possible exploring node if it's relatively near current position
+							// using insertion sort
+							possibleNodes[numPossibleNodes] = j;
+							for (int k = numPossibleNodes-1; k >= 0; k--) {
+								int dist2 = gridDistance(currentPos,victims[possibleNodes[k]]) + gridDistance(victims[possibleNodes[k]], nearstH);
+								if( dist < dist2 ){
+									possibleNodes[k+1] = possibleNodes[k];
+									possibleNodes[k] = j;
+								} else {
+									break;
+								}
+							}
+							if( numPossibleNodes < MAX_NODES_FROM_CURRENT_POSITION + 1) numPossibleNodes++;
+						}
+					}
+					
+					if( numPossibleNodes == 0 ){
+						
+						if( inHospital) break; // not possible to get any more victims
+						else {
+							inHospital = true;
+							totalOfVictimsInAmbulance = 0;
+							int nearestHospital =  findNearstHospital(currentPos);
+							totalTime += gridDistance(currentPos,hospitals[ nearestHospital]);
+							totalTime += 1; //unloadVictims
+							listNodes.get(ambulanceCount).add(-(nearestHospital+1)); // hospitals are stored with negative numbers and 1 based
+							currentPos = hospitals[nearestHospital];
+							firstToDie = Integer.MAX_VALUE;
+							continue;
+						}
+					}
+					
+					int nextNode = possibleNodes[random.nextInt(numPossibleNodes)]; //randomized choice
+					saved[nextNode] = true;
+					firstToDie = Math.min(firstToDie, victims[nextNode][2]);
+					numPreviousSaves[nextNode]++;
+					int dist = gridDistance(currentPos,victims[nextNode]) + 1;
+					totalTime += dist;
+					Edge e = new Edge(currentPos, victims[nextNode]);
+					if( !graph.containsKey(e)){
+						graph.put(e, 1);
+					} else {
+						graph.put(e, graph.get(e) + 1);
+					}
+					currentPos[0] = victims[nextNode][0];
+					currentPos[1] = victims[nextNode][1];
+					listNodes.get(ambulanceCount).add(nextNode);
+					inHospital = false;
+					totalOfVictimsInAmbulance++;
+					totalIterationScore++;
+					
 				}
+				
+				ambulanceCount++;
 			}
-			
-			int nextNode = possibleNodes[random.nextInt(numPossibleNodes)]; //randomized choice
-			saved[nextNode] = true;
-			firstToDie = Math.min(firstToDie, victims[nextNode][2]);
-			numPreviousSaves[nextNode]++;
-			totalTime += gridDistance(currentPos,victims[nextNode]) + 1;
-			Edge e = new Edge(currentPos, victims[nextNode]);
-			if( !graph.containsKey(e)){
-				graph.put(e, 1);
-			} else {
-				graph.put(e, graph.get(e) + 1);
-			}
-			currentPos[0] = victims[nextNode][0];
-			currentPos[1] = victims[nextNode][1];
-			listNodes.get(iteration).add(nextNode);
-			inHospital = false;
-			totalOfVictimsInAmbulance++;
+		}
+		
+		if( bestScore < totalIterationScore){
+			bestScore = totalIterationScore;
+			bestSolution = listNodes;
 		}
 		
 	}
-	bestScore = 0;
+	System.out.println("Best Ant Score = " + bestScore);
+	return bestSolution;
   }
   
   
   //=======END ANT COLONIZATION==========//
+  
+  private static void printOutput( ArrayList<ArrayList<Integer>> paths ){
+	  System.out.println("");
+	  int cont =0;
+	  for(ArrayList<Integer> ambulance : paths){
+		  System.out.print("Ambuance " + (cont++));
+		  for( int node : ambulance){
+			  if( node >=0 ){
+				  System.out.print( " " + node + " (" + victims[node][0] + "," + victims[node][1] + "," + victims[node][0] + ");" );
+			  } else {
+				  int hospital = (node * (-1)) -1;
+				  System.out.print(" (" + hospitals[hospital][0] + "," + victims[hospital][1] + ");" );
+			  }
+		  }
+		  System.out.println("");
+	  }
+  }
   
   private static double distance(int[] point1, int[] point2) {
 
