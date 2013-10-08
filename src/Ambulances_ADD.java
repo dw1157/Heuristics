@@ -274,7 +274,7 @@ public class Ambulances_ADD {
 	  }
 	  System.out.println("");
 	  for(ArrayList<Integer> ambulance : paths){
-		  System.out.print("Ambuance " + (cont++));
+		  System.out.print("ambulance " + (cont++));
 		  for( int node : ambulance){
 			  if( node >=0 ){
 				  System.out.print( " " + node + " (" + victims[node][0] + "," + victims[node][1] + "," + victims[node][2] + ");" );

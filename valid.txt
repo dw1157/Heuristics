@@ -1,0 +1,711 @@
+results from file  output.txt
+hospitals 0 (84,82); 1 (79,21); 2 (25,78); 3 (60,53); 4 (23,25);
+ambulance 0 78 (83,75,78); 44 (86,69,103); 298 (80,74,153); 160 (77,76,124); (84,82); 69 (83,84,157); 284 (75,80,135); 3 (93,87,153); 113 (92,90,144); (84,82); 70 (84,90,149); (84,82);
+ambulance 1 285 (70,82,155); 139 (83,79,130); 92 (86,94,142); 187 (74,93,89); (84,82); 6 (91,94,147); 74 (87,99,156); (84,82);
+ambulance 2 148 (81,69,82); 129 (86,64,74); 122 (78,65,129); 192 (66,53,96); (60,53); 189 (57,54,144); 33 (54,58,113); 20 (56,47,112); 293 (57,50,152); (60,53); 166 (43,55,161); 183 (62,52,156); (60,53);
+ambulance 3 216 (82,65,107); 101 (82,55,134); 22 (80,52,159); 116 (71,47,120); (60,53); 197 (60,42,103); 170 (60,49,155); (60,53); 112 (63,35,162); 267 (55,41,154); (60,53);
+ambulance 4 171 (87,99,115); 295 (90,100,136); 296 (97,98,76); 136 (99,98,149); (84,82); 158 (77,68,130); 110 (91,72,155); (84,82);
+ambulance 5 282 (80,15,153); 62 (83,14,117); 4 (80,16,131); 83 (85,18,102); (79,21); 47 (85,23,139); 40 (84,31,114); 59 (74,29,87); 281 (78,29,96); (79,21); 125 (68,22,136); 299 (67,22,165); 34 (60,23,143); (79,21); 252 (82,13,162); (79,21);
+ambulance 6 84 (76,30,82); 157 (71,34,88); 130 (68,28,88); 259 (62,30,77); (60,53); 224 (64,58,104); (60,53); 292 (77,45,150); 16 (80,47,165); 10 (81,48,155); (60,53);
+ambulance 7 276 (69,19,84); 206 (59,22,70); 154 (84,21,111); (79,21); 8 (86,26,155); 99 (90,32,112); (79,21); 95 (52,23,169); (79,21);
+ambulance 8 1 (92,25,93); 57 (88,24,100); 137 (96,22,98); 50 (98,23,106); (79,21); 109 (78,9,154); 134 (66,5,164); 11 (59,9,144); 215 (66,10,138); (79,21);
+ambulance 9 211 (94,16,115); 15 (93,5,80); 207 (76,9,73); (79,21); 260 (72,6,124); (79,21);
+ambulance 10 79 (92,28,103); 142 (99,29,116); 29 (93,24,141); 272 (96,33,155); (79,21); 108 (85,65,167); (84,82);
+ambulance 11 167 (98,18,97); 97 (96,37,99); 128 (96,33,82); 238 (88,33,95); (79,21); 120 (29,20,150); 274 (31,24,167); (23,25);
+ambulance 12 45 (72,44,86); 214 (71,42,82); 168 (81,40,127); 38 (74,38,88); (79,21); 263 (34,16,164); 96 (31,16,154); (23,25);
+ambulance 13 150 (58,27,94); 82 (49,25,98); 254 (25,22,133); 55 (30,24,97); (23,25); 36 (12,23,159); 107 (12,35,141); 278 (12,35,138); 24 (17,30,140); (23,25);
+ambulance 14 52 (26,83,121); 30 (24,85,139); 21 (25,73,86); 162 (23,78,103); (25,78); 93 (27,84,79); 190 (27,91,107); 141 (31,88,145); (25,78); 290 (15,78,149); 273 (11,79,162); 86 (11,78,168); 121 (23,75,157); (25,78); 123 (27,72,157); 133 (32,69,159); (25,78);
+ambulance 15 174 (32,74,121); 87 (32,67,157); 155 (36,69,120); 227 (34,66,70); (25,78); 53 (24,70,100); 265 (21,84,115); 42 (20,84,114); (25,78); 152 (30,63,147); (25,78);
+ambulance 16 100 (29,75,83); 243 (34,81,137); 184 (38,80,129); 67 (37,72,126); (25,78); 131 (16,77,135); 153 (8,80,124); 255 (10,85,143); 240 (14,76,132); (25,78); 191 (38,87,162); (25,78);
+ambulance 17 28 (17,82,84); 76 (15,84,75); 12 (15,87,103); 9 (9,75,101); (25,78); 212 (39,71,108); (25,78); 159 (17,63,157); (25,78);
+ambulance 18 25 (38,83,140); 258 (40,84,99); 165 (46,78,90); 2 (38,76,81); (25,78); 297 (41,69,124); 244 (40,68,128); (25,78);
+ambulance 19 199 (24,95,96); 71 (31,98,92); 239 (35,92,86); 182 (34,86,119); (25,78); 193 (32,92,115); (25,78); 94 (20,59,161); (25,78);
+ambulance 20 251 (56,63,95); 144 (53,55,86); 164 (54,61,89); 194 (48,64,95); (60,53); 81 (58,72,140); 235 (67,70,150); (60,53);
+ambulance 21 7 (60,68,72); 266 (51,59,147); 88 (60,65,96); 80 (60,66,102); (60,53); 124 (41,50,149); 178 (31,44,157); 56 (18,40,151); (23,25);
+ambulance 22 231 (42,49,84); 175 (45,44,87); 58 (38,54,95); 51 (38,57,120); (60,53); 31 (86,50,150); (60,53);
+ambulance 23 132 (51,41,114); 103 (54,38,113); 138 (56,36,115); 233 (64,26,135); (79,21); 117 (91,39,156); (79,21);
+ambulance 24 287 (78,57,85); 61 (69,68,110); 268 (68,69,80); 217 (68,62,87); (60,53); 288 (52,71,163); 179 (48,86,152); (25,78);
+ambulance 25 106 (56,72,113); 196 (52,85,161); 63 (61,85,89); (84,82); 135 (100,72,135); 172 (99,77,163); (84,82);
+ambulance 26 49 (53,33,72); 176 (52,32,124); 250 (62,41,110); (60,53); 186 (49,76,139); 229 (50,73,157); (25,78);
+ambulance 27 105 (40,49,78); 181 (26,45,110); 286 (22,39,139); 291 (19,31,103); (23,25); 237 (16,35,115); (23,25); 269 (37,34,169); (23,25);
+ambulance 28 204 (86,51,133); 163 (87,51,88); 72 (97,71,154); 5 (95,82,115); (84,82); 232 (95,69,140); (84,82);
+ambulance 29 264 (40,63,136); 209 (16,65,107); 213 (29,57,109); (25,78);
+ambulance 30 223 (40,61,117); 188 (30,35,138); 222 (25,21,129); 104 (26,12,146); (23,25);
+ambulance 31 143 (15,33,118); 145 (13,41,154); 26 (10,46,108); 161 (13,45,157); (23,25); 32 (4,34,161); 156 (3,27,134); (23,25);
+ambulance 32 146 (26,11,100); 89 (30,3,127); 180 (39,13,156); 102 (38,7,104); (23,25); 75 (42,13,158); (23,25);
+ambulance 33 115 (31,39,110); 218 (32,52,103); 262 (15,49,132); 234 (16,55,146); (25,78);
+ambulance 34 48 (7,16,152); 77 (7,11,141); 270 (2,11,106); 203 (5,14,132); (23,25); 173 (41,5,164); (23,25);
+ambulance 35 68 (25,11,84); 221 (43,12,80); 241 (40,28,100); (23,25); 39 (42,22,132); (23,25);
+ambulance 36 85 (1,28,99); 64 (2,45,113); 27 (6,48,144); 147 (4,43,139); (23,25);
+ambulance 37 0 (15,33,91); 119 (12,49,80); 275 (23,52,136); (23,25); 90 (12,61,161); (25,78);
+ambulance 38 230 (46,31,97); 294 (53,23,132); 283 (49,20,136); 225 (44,18,110); (23,25); 261 (6,37,156); (23,25);
+ambulance 39 111 (42,38,103); 126 (34,40,87); (23,25); 246 (2,27,121); (23,25);
+ambulance 40 114 (13,7,83); 201 (10,2,93); (23,25); 202 (8,49,159); (23,25);
+AQUI
+
+Ambulance id =  0
+Time 0 @ (84, 82) : Starting
+Time 9 @ (83, 75) : Picked  78
+Time 19 @ (86, 69) : Picked  44
+Time 31 @ (80, 74) : Picked  298
+Time 37 @ (77, 76) : Picked  160
+Time 51 @ (84, 82) : Rescued person (id,life) 78 78
+Time 51 @ (84, 82) : Rescued person (id,life) 44 103
+Time 51 @ (84, 82) : Rescued person (id,life) 298 153
+Time 51 @ (84, 82) : Rescued person (id,life) 160 124
+Time 55 @ (83, 84) : Picked  69
+Time 68 @ (75, 80) : Picked  284
+Time 94 @ (93, 87) : Picked  3
+Time 99 @ (92, 90) : Picked  113
+Time 116 @ (84, 82) : Rescued person (id,life) 69 157
+Time 116 @ (84, 82) : Rescued person (id,life) 284 135
+Time 116 @ (84, 82) : Rescued person (id,life) 3 153
+Time 116 @ (84, 82) : Rescued person (id,life) 113 144
+Time 125 @ (84, 90) : Picked  70
+Time 134 @ (84, 82) : Rescued person (id,life) 70 149
+AQUI
+
+Ambulance id =  1
+Time 0 @ (84, 82) : Starting
+Time 15 @ (70, 82) : Picked  285
+Time 32 @ (83, 79) : Picked  139
+Time 51 @ (86, 94) : Picked  92
+Time 65 @ (74, 93) : Picked  187
+Time 87 @ (84, 82) : Rescued person (id,life) 285 155
+Time 87 @ (84, 82) : Rescued person (id,life) 139 130
+Time 87 @ (84, 82) : Rescued person (id,life) 92 142
+Time 87 @ (84, 82) : Rescued person (id,life) 187 89
+Time 107 @ (91, 94) : Picked  6
+Time 117 @ (87, 99) : Picked  74
+Time 138 @ (84, 82) : Rescued person (id,life) 6 147
+Time 138 @ (84, 82) : Rescued person (id,life) 74 156
+AQUI
+
+Ambulance id =  2
+Time 0 @ (84, 82) : Starting
+Time 17 @ (81, 69) : Picked  148
+Time 28 @ (86, 64) : Picked  129
+Time 38 @ (78, 65) : Picked  122
+Time 63 @ (66, 53) : Picked  192
+Time 70 @ (60, 53) : Rescued person (id,life) 148 82
+Time 70 @ (60, 53) : Rescued person (id,life) 129 74
+Time 70 @ (60, 53) : Rescued person (id,life) 122 129
+Time 70 @ (60, 53) : Rescued person (id,life) 192 96
+Time 75 @ (57, 54) : Picked  189
+Time 83 @ (54, 58) : Picked  33
+Time 97 @ (56, 47) : Picked  20
+Time 102 @ (57, 50) : Picked  293
+Time 109 @ (60, 53) : Rescued person (id,life) 189 144
+Time 109 @ (60, 53) : Rescued person (id,life) 33 113
+Time 109 @ (60, 53) : Rescued person (id,life) 20 112
+Time 109 @ (60, 53) : Rescued person (id,life) 293 152
+Time 129 @ (43, 55) : Picked  166
+Time 152 @ (62, 52) : Picked  183
+Time 156 @ (60, 53) : Rescued person (id,life) 166 161
+Time 156 @ (60, 53) : Rescued person (id,life) 183 156
+AQUI
+
+Ambulance id =  3
+Time 0 @ (84, 82) : Starting
+Time 20 @ (82, 65) : Picked  216
+Time 31 @ (82, 55) : Picked  101
+Time 37 @ (80, 52) : Picked  22
+Time 52 @ (71, 47) : Picked  116
+Time 70 @ (60, 53) : Rescued person (id,life) 216 107
+Time 70 @ (60, 53) : Rescued person (id,life) 101 134
+Time 70 @ (60, 53) : Rescued person (id,life) 22 159
+Time 70 @ (60, 53) : Rescued person (id,life) 116 120
+Time 82 @ (60, 42) : Picked  197
+Time 90 @ (60, 49) : Picked  170
+Time 95 @ (60, 53) : Rescued person (id,life) 197 103
+Time 95 @ (60, 53) : Rescued person (id,life) 170 155
+Time 117 @ (63, 35) : Picked  112
+Time 132 @ (55, 41) : Picked  267
+Time 150 @ (60, 53) : Rescued person (id,life) 112 162
+Time 150 @ (60, 53) : Rescued person (id,life) 267 154
+AQUI
+
+Ambulance id =  4
+Time 0 @ (84, 82) : Starting
+Time 21 @ (87, 99) : Picked  171
+Time 26 @ (90, 100) : Picked  295
+Time 36 @ (97, 98) : Picked  296
+Time 39 @ (99, 98) : Picked  136
+Time 71 @ (84, 82) : Rescued person (id,life) 171 115
+Time 71 @ (84, 82) : Rescued person (id,life) 295 136
+Time 71 @ (84, 82) : Rescued person (id,life) 296 76
+Time 71 @ (84, 82) : Rescued person (id,life) 136 149
+Time 93 @ (77, 68) : Picked  158
+Time 112 @ (91, 72) : Picked  110
+Time 130 @ (84, 82) : Rescued person (id,life) 158 130
+Time 130 @ (84, 82) : Rescued person (id,life) 110 155
+AQUI
+
+Ambulance id =  5
+Time 0 @ (79, 21) : Starting
+Time 8 @ (80, 15) : Picked  282
+Time 13 @ (83, 14) : Picked  62
+Time 19 @ (80, 16) : Picked  4
+Time 27 @ (85, 18) : Picked  83
+Time 37 @ (79, 21) : Rescued person (id,life) 282 153
+Time 37 @ (79, 21) : Rescued person (id,life) 62 117
+Time 37 @ (79, 21) : Rescued person (id,life) 4 131
+Time 37 @ (79, 21) : Rescued person (id,life) 83 102
+Time 46 @ (85, 23) : Picked  47
+Time 56 @ (84, 31) : Picked  40
+Time 69 @ (74, 29) : Picked  59
+Time 74 @ (78, 29) : Picked  281
+Time 84 @ (79, 21) : Rescued person (id,life) 47 139
+Time 84 @ (79, 21) : Rescued person (id,life) 40 114
+Time 84 @ (79, 21) : Rescued person (id,life) 59 87
+Time 84 @ (79, 21) : Rescued person (id,life) 281 96
+Time 97 @ (68, 22) : Picked  125
+Time 99 @ (67, 22) : Picked  299
+Time 108 @ (60, 23) : Picked  34
+Time 130 @ (79, 21) : Rescued person (id,life) 125 136
+Time 130 @ (79, 21) : Rescued person (id,life) 299 165
+Time 130 @ (79, 21) : Rescued person (id,life) 34 143
+Time 142 @ (82, 13) : Picked  252
+Time 154 @ (79, 21) : Rescued person (id,life) 252 162
+AQUI
+
+Ambulance id =  6
+Time 0 @ (79, 21) : Starting
+Time 13 @ (76, 30) : Picked  84
+Time 23 @ (71, 34) : Picked  157
+Time 33 @ (68, 28) : Picked  130
+Time 42 @ (62, 30) : Picked  259
+Time 68 @ (60, 53) : Rescued person (id,life) 84 82
+Time 68 @ (60, 53) : Rescued person (id,life) 157 88
+Time 68 @ (60, 53) : Rescued person (id,life) 130 88
+Time 68 @ (60, 53) : Rescued person (id,life) 259 77
+Time 78 @ (64, 58) : Picked  224
+Time 88 @ (60, 53) : Rescued person (id,life) 224 104
+Time 114 @ (77, 45) : Picked  292
+Time 120 @ (80, 47) : Picked  16
+Time 123 @ (81, 48) : Picked  10
+Time 150 @ (60, 53) : Rescued person (id,life) 292 150
+Time 150 @ (60, 53) : Rescued person (id,life) 16 165
+Time 150 @ (60, 53) : Rescued person (id,life) 10 155
+AQUI
+
+Ambulance id =  7
+Time 0 @ (79, 21) : Starting
+Time 13 @ (69, 19) : Picked  276
+Time 27 @ (59, 22) : Picked  206
+Time 54 @ (84, 21) : Picked  154
+Time 60 @ (79, 21) : Rescued person (id,life) 276 84
+Time 60 @ (79, 21) : Rescued person (id,life) 206 70
+Time 60 @ (79, 21) : Rescued person (id,life) 154 111
+Time 73 @ (86, 26) : Picked  8
+Time 84 @ (90, 32) : Picked  99
+Time 107 @ (79, 21) : Rescued person (id,life) 8 155
+Time 107 @ (79, 21) : Rescued person (id,life) 99 112
+Time 137 @ (52, 23) : Picked  95
+Time 167 @ (79, 21) : Rescued person (id,life) 95 169
+AQUI
+
+Ambulance id =  8
+Time 0 @ (79, 21) : Starting
+Time 18 @ (92, 25) : Picked  1
+Time 24 @ (88, 24) : Picked  57
+Time 35 @ (96, 22) : Picked  137
+Time 39 @ (98, 23) : Picked  50
+Time 61 @ (79, 21) : Rescued person (id,life) 1 93
+Time 61 @ (79, 21) : Rescued person (id,life) 57 100
+Time 61 @ (79, 21) : Rescued person (id,life) 137 98
+Time 61 @ (79, 21) : Rescued person (id,life) 50 106
+Time 75 @ (78, 9) : Picked  109
+Time 92 @ (66, 5) : Picked  134
+Time 104 @ (59, 9) : Picked  11
+Time 113 @ (66, 10) : Picked  215
+Time 138 @ (79, 21) : Rescued person (id,life) 109 154
+Time 138 @ (79, 21) : Rescued person (id,life) 134 164
+Time 138 @ (79, 21) : Rescued person (id,life) 11 144
+Time 138 @ (79, 21) : Rescued person (id,life) 215 138
+AQUI
+
+Ambulance id =  9
+Time 0 @ (79, 21) : Starting
+Time 21 @ (94, 16) : Picked  211
+Time 34 @ (93, 5) : Picked  15
+Time 56 @ (76, 9) : Picked  207
+Time 72 @ (79, 21) : Rescued person (id,life) 211 115
+Time 72 @ (79, 21) : Rescued person (id,life) 15 80
+Time 72 @ (79, 21) : Rescued person (id,life) 207 73
+Time 95 @ (72, 6) : Picked  260
+Time 118 @ (79, 21) : Rescued person (id,life) 260 124
+AQUI
+
+Ambulance id =  10
+Time 0 @ (79, 21) : Starting
+Time 21 @ (92, 28) : Picked  79
+Time 30 @ (99, 29) : Picked  142
+Time 42 @ (93, 24) : Picked  29
+Time 55 @ (96, 33) : Picked  272
+Time 85 @ (79, 21) : Rescued person (id,life) 79 103
+Time 85 @ (79, 21) : Rescued person (id,life) 142 116
+Time 85 @ (79, 21) : Rescued person (id,life) 29 141
+Time 85 @ (79, 21) : Rescued person (id,life) 272 155
+Time 136 @ (85, 65) : Picked  108
+Time 155 @ (84, 82) : Rescued person (id,life) 108 167
+AQUI
+
+Ambulance id =  11
+Time 0 @ (79, 21) : Starting
+Time 23 @ (98, 18) : Picked  167
+Time 45 @ (96, 37) : Picked  97
+Time 50 @ (96, 33) : Picked  128
+Time 59 @ (88, 33) : Picked  238
+Time 81 @ (79, 21) : Rescued person (id,life) 167 97
+Time 81 @ (79, 21) : Rescued person (id,life) 97 99
+Time 81 @ (79, 21) : Rescued person (id,life) 128 82
+Time 81 @ (79, 21) : Rescued person (id,life) 238 95
+Time 133 @ (29, 20) : Picked  120
+Time 140 @ (31, 24) : Picked  274
+Time 150 @ (23, 25) : Rescued person (id,life) 120 150
+Time 150 @ (23, 25) : Rescued person (id,life) 274 167
+AQUI
+
+Ambulance id =  12
+Time 0 @ (79, 21) : Starting
+Time 31 @ (72, 44) : Picked  45
+Time 35 @ (71, 42) : Picked  214
+Time 48 @ (81, 40) : Picked  168
+Time 58 @ (74, 38) : Picked  38
+Time 81 @ (79, 21) : Rescued person (id,life) 45 86
+Time 81 @ (79, 21) : Rescued person (id,life) 214 82
+Time 81 @ (79, 21) : Rescued person (id,life) 168 127
+Time 81 @ (79, 21) : Rescued person (id,life) 38 88
+Time 132 @ (34, 16) : Picked  263
+Time 136 @ (31, 16) : Picked  96
+Time 154 @ (23, 25) : Rescued person (id,life) 263 164
+Time 154 @ (23, 25) : Rescued person (id,life) 96 154
+AQUI
+
+Ambulance id =  13
+Time 0 @ (79, 21) : Starting
+Time 28 @ (58, 27) : Picked  150
+Time 40 @ (49, 25) : Picked  82
+Time 68 @ (25, 22) : Picked  254
+Time 76 @ (30, 24) : Picked  55
+Time 85 @ (23, 25) : Rescued person (id,life) 150 94
+Time 85 @ (23, 25) : Rescued person (id,life) 82 98
+Time 85 @ (23, 25) : Rescued person (id,life) 254 133
+Time 85 @ (23, 25) : Rescued person (id,life) 55 97
+Time 99 @ (12, 23) : Picked  36
+Time 112 @ (12, 35) : Picked  107
+Time 113 @ (12, 35) : Picked  278
+Time 124 @ (17, 30) : Picked  24
+Time 136 @ (23, 25) : Rescued person (id,life) 36 159
+Time 136 @ (23, 25) : Rescued person (id,life) 107 141
+Time 136 @ (23, 25) : Rescued person (id,life) 278 138
+Time 136 @ (23, 25) : Rescued person (id,life) 24 140
+AQUI
+
+Ambulance id =  14
+Time 0 @ (25, 78) : Starting
+Time 7 @ (26, 83) : Picked  52
+Time 12 @ (24, 85) : Picked  30
+Time 26 @ (25, 73) : Picked  21
+Time 34 @ (23, 78) : Picked  162
+Time 37 @ (25, 78) : Rescued person (id,life) 52 121
+Time 37 @ (25, 78) : Rescued person (id,life) 30 139
+Time 37 @ (25, 78) : Rescued person (id,life) 21 86
+Time 37 @ (25, 78) : Rescued person (id,life) 162 103
+Time 46 @ (27, 84) : Picked  93
+Time 54 @ (27, 91) : Picked  190
+Time 62 @ (31, 88) : Picked  141
+Time 79 @ (25, 78) : Rescued person (id,life) 93 79
+Time 79 @ (25, 78) : Rescued person (id,life) 190 107
+Time 79 @ (25, 78) : Rescued person (id,life) 141 145
+Time 90 @ (15, 78) : Picked  290
+Time 96 @ (11, 79) : Picked  273
+Time 98 @ (11, 78) : Picked  86
+Time 114 @ (23, 75) : Picked  121
+Time 120 @ (25, 78) : Rescued person (id,life) 290 149
+Time 120 @ (25, 78) : Rescued person (id,life) 273 162
+Time 120 @ (25, 78) : Rescued person (id,life) 86 168
+Time 120 @ (25, 78) : Rescued person (id,life) 121 157
+Time 129 @ (27, 72) : Picked  123
+Time 138 @ (32, 69) : Picked  133
+Time 155 @ (25, 78) : Rescued person (id,life) 123 157
+Time 155 @ (25, 78) : Rescued person (id,life) 133 159
+AQUI
+
+Ambulance id =  15
+Time 0 @ (25, 78) : Starting
+Time 12 @ (32, 74) : Picked  174
+Time 20 @ (32, 67) : Picked  87
+Time 27 @ (36, 69) : Picked  155
+Time 33 @ (34, 66) : Picked  227
+Time 55 @ (25, 78) : Rescued person (id,life) 174 121
+Time 55 @ (25, 78) : Rescued person (id,life) 87 157
+Time 55 @ (25, 78) : Rescued person (id,life) 155 120
+Time 55 @ (25, 78) : Rescued person (id,life) 227 70
+Time 65 @ (24, 70) : Picked  53
+Time 83 @ (21, 84) : Picked  265
+Time 85 @ (20, 84) : Picked  42
+Time 97 @ (25, 78) : Rescued person (id,life) 53 100
+Time 97 @ (25, 78) : Rescued person (id,life) 265 115
+Time 97 @ (25, 78) : Rescued person (id,life) 42 114
+Time 118 @ (30, 63) : Picked  152
+Time 139 @ (25, 78) : Rescued person (id,life) 152 147
+AQUI
+
+Ambulance id =  16
+Time 0 @ (25, 78) : Starting
+Time 8 @ (29, 75) : Picked  100
+Time 20 @ (34, 81) : Picked  243
+Time 26 @ (38, 80) : Picked  184
+Time 36 @ (37, 72) : Picked  67
+Time 55 @ (25, 78) : Rescued person (id,life) 100 83
+Time 55 @ (25, 78) : Rescued person (id,life) 243 137
+Time 55 @ (25, 78) : Rescued person (id,life) 184 129
+Time 55 @ (25, 78) : Rescued person (id,life) 67 126
+Time 66 @ (16, 77) : Picked  131
+Time 78 @ (8, 80) : Picked  153
+Time 86 @ (10, 85) : Picked  255
+Time 100 @ (14, 76) : Picked  240
+Time 114 @ (25, 78) : Rescued person (id,life) 131 135
+Time 114 @ (25, 78) : Rescued person (id,life) 153 124
+Time 114 @ (25, 78) : Rescued person (id,life) 255 143
+Time 114 @ (25, 78) : Rescued person (id,life) 240 132
+Time 137 @ (38, 87) : Picked  191
+Time 160 @ (25, 78) : Rescued person (id,life) 191 162
+AQUI
+
+Ambulance id =  17
+Time 0 @ (25, 78) : Starting
+Time 13 @ (17, 82) : Picked  28
+Time 18 @ (15, 84) : Picked  76
+Time 22 @ (15, 87) : Picked  12
+Time 41 @ (9, 75) : Picked  9
+Time 61 @ (25, 78) : Rescued person (id,life) 28 84
+Time 61 @ (25, 78) : Rescued person (id,life) 76 75
+Time 61 @ (25, 78) : Rescued person (id,life) 12 103
+Time 61 @ (25, 78) : Rescued person (id,life) 9 101
+Time 83 @ (39, 71) : Picked  212
+Time 105 @ (25, 78) : Rescued person (id,life) 212 108
+Time 129 @ (17, 63) : Picked  159
+Time 153 @ (25, 78) : Rescued person (id,life) 159 157
+AQUI
+
+Ambulance id =  18
+Time 0 @ (25, 78) : Starting
+Time 19 @ (38, 83) : Picked  25
+Time 23 @ (40, 84) : Picked  258
+Time 36 @ (46, 78) : Picked  165
+Time 47 @ (38, 76) : Picked  2
+Time 63 @ (25, 78) : Rescued person (id,life) 25 140
+Time 63 @ (25, 78) : Rescued person (id,life) 258 99
+Time 63 @ (25, 78) : Rescued person (id,life) 165 90
+Time 63 @ (25, 78) : Rescued person (id,life) 2 81
+Time 89 @ (41, 69) : Picked  297
+Time 92 @ (40, 68) : Picked  244
+Time 118 @ (25, 78) : Rescued person (id,life) 297 124
+Time 118 @ (25, 78) : Rescued person (id,life) 244 128
+AQUI
+
+Ambulance id =  19
+Time 0 @ (25, 78) : Starting
+Time 19 @ (24, 95) : Picked  199
+Time 30 @ (31, 98) : Picked  71
+Time 41 @ (35, 92) : Picked  239
+Time 49 @ (34, 86) : Picked  182
+Time 67 @ (25, 78) : Rescued person (id,life) 199 96
+Time 67 @ (25, 78) : Rescued person (id,life) 71 92
+Time 67 @ (25, 78) : Rescued person (id,life) 239 86
+Time 67 @ (25, 78) : Rescued person (id,life) 182 119
+Time 89 @ (32, 92) : Picked  193
+Time 111 @ (25, 78) : Rescued person (id,life) 193 115
+Time 136 @ (20, 59) : Picked  94
+Time 161 @ (25, 78) : Rescued person (id,life) 94 161
+AQUI
+
+Ambulance id =  20
+Time 0 @ (60, 53) : Starting
+Time 15 @ (56, 63) : Picked  251
+Time 27 @ (53, 55) : Picked  144
+Time 35 @ (54, 61) : Picked  164
+Time 45 @ (48, 64) : Picked  194
+Time 69 @ (60, 53) : Rescued person (id,life) 251 95
+Time 69 @ (60, 53) : Rescued person (id,life) 144 86
+Time 69 @ (60, 53) : Rescued person (id,life) 164 89
+Time 69 @ (60, 53) : Rescued person (id,life) 194 95
+Time 91 @ (58, 72) : Picked  81
+Time 103 @ (67, 70) : Picked  235
+Time 128 @ (60, 53) : Rescued person (id,life) 81 140
+Time 128 @ (60, 53) : Rescued person (id,life) 235 150
+AQUI
+
+Ambulance id =  21
+Time 0 @ (60, 53) : Starting
+Time 16 @ (60, 68) : Picked  7
+Time 35 @ (51, 59) : Picked  266
+Time 51 @ (60, 65) : Picked  88
+Time 53 @ (60, 66) : Picked  80
+Time 67 @ (60, 53) : Rescued person (id,life) 7 72
+Time 67 @ (60, 53) : Rescued person (id,life) 266 147
+Time 67 @ (60, 53) : Rescued person (id,life) 88 96
+Time 67 @ (60, 53) : Rescued person (id,life) 80 102
+Time 90 @ (41, 50) : Picked  124
+Time 107 @ (31, 44) : Picked  178
+Time 125 @ (18, 40) : Picked  56
+Time 146 @ (23, 25) : Rescued person (id,life) 124 149
+Time 146 @ (23, 25) : Rescued person (id,life) 178 157
+Time 146 @ (23, 25) : Rescued person (id,life) 56 151
+AQUI
+
+Ambulance id =  22
+Time 0 @ (60, 53) : Starting
+Time 23 @ (42, 49) : Picked  231
+Time 32 @ (45, 44) : Picked  175
+Time 50 @ (38, 54) : Picked  58
+Time 54 @ (38, 57) : Picked  51
+Time 81 @ (60, 53) : Rescued person (id,life) 231 84
+Time 81 @ (60, 53) : Rescued person (id,life) 175 87
+Time 81 @ (60, 53) : Rescued person (id,life) 58 95
+Time 81 @ (60, 53) : Rescued person (id,life) 51 120
+Time 111 @ (86, 50) : Picked  31
+Time 141 @ (60, 53) : Rescued person (id,life) 31 150
+AQUI
+
+Ambulance id =  23
+Time 0 @ (60, 53) : Starting
+Time 22 @ (51, 41) : Picked  132
+Time 29 @ (54, 38) : Picked  103
+Time 34 @ (56, 36) : Picked  138
+Time 53 @ (64, 26) : Picked  233
+Time 74 @ (79, 21) : Rescued person (id,life) 132 114
+Time 74 @ (79, 21) : Rescued person (id,life) 103 113
+Time 74 @ (79, 21) : Rescued person (id,life) 138 115
+Time 74 @ (79, 21) : Rescued person (id,life) 233 135
+Time 105 @ (91, 39) : Picked  117
+Time 136 @ (79, 21) : Rescued person (id,life) 117 156
+AQUI
+
+Ambulance id =  24
+Time 0 @ (60, 53) : Starting
+Time 23 @ (78, 57) : Picked  287
+Time 44 @ (69, 68) : Picked  61
+Time 47 @ (68, 69) : Picked  268
+Time 55 @ (68, 62) : Picked  217
+Time 73 @ (60, 53) : Rescued person (id,life) 287 85
+Time 73 @ (60, 53) : Rescued person (id,life) 61 110
+Time 73 @ (60, 53) : Rescued person (id,life) 268 80
+Time 73 @ (60, 53) : Rescued person (id,life) 217 87
+Time 100 @ (52, 71) : Picked  288
+Time 120 @ (48, 86) : Picked  179
+Time 152 @ (25, 78) : Rescued person (id,life) 288 163
+Time 152 @ (25, 78) : Rescued person (id,life) 179 152
+AQUI
+
+Ambulance id =  25
+Time 0 @ (60, 53) : Starting
+Time 24 @ (56, 72) : Picked  106
+Time 42 @ (52, 85) : Picked  196
+Time 52 @ (61, 85) : Picked  63
+Time 79 @ (84, 82) : Rescued person (id,life) 106 113
+Time 79 @ (84, 82) : Rescued person (id,life) 196 161
+Time 79 @ (84, 82) : Rescued person (id,life) 63 89
+Time 106 @ (100, 72) : Picked  135
+Time 113 @ (99, 77) : Picked  172
+Time 134 @ (84, 82) : Rescued person (id,life) 135 135
+Time 134 @ (84, 82) : Rescued person (id,life) 172 163
+AQUI
+
+Ambulance id =  26
+Time 0 @ (60, 53) : Starting
+Time 28 @ (53, 33) : Picked  49
+Time 31 @ (52, 32) : Picked  176
+Time 51 @ (62, 41) : Picked  250
+Time 66 @ (60, 53) : Rescued person (id,life) 49 72
+Time 66 @ (60, 53) : Rescued person (id,life) 176 124
+Time 66 @ (60, 53) : Rescued person (id,life) 250 110
+Time 101 @ (49, 76) : Picked  186
+Time 106 @ (50, 73) : Picked  229
+Time 137 @ (25, 78) : Rescued person (id,life) 186 139
+Time 137 @ (25, 78) : Rescued person (id,life) 229 157
+AQUI
+
+Ambulance id =  27
+Time 0 @ (60, 53) : Starting
+Time 25 @ (40, 49) : Picked  105
+Time 44 @ (26, 45) : Picked  181
+Time 55 @ (22, 39) : Picked  286
+Time 67 @ (19, 31) : Picked  291
+Time 78 @ (23, 25) : Rescued person (id,life) 105 78
+Time 78 @ (23, 25) : Rescued person (id,life) 181 110
+Time 78 @ (23, 25) : Rescued person (id,life) 286 139
+Time 78 @ (23, 25) : Rescued person (id,life) 291 103
+Time 96 @ (16, 35) : Picked  237
+Time 114 @ (23, 25) : Rescued person (id,life) 237 115
+Time 138 @ (37, 34) : Picked  269
+Time 162 @ (23, 25) : Rescued person (id,life) 269 169
+AQUI
+
+Ambulance id =  28
+Time 0 @ (60, 53) : Starting
+Time 29 @ (86, 51) : Picked  204
+Time 31 @ (87, 51) : Picked  163
+Time 62 @ (97, 71) : Picked  72
+Time 76 @ (95, 82) : Picked  5
+Time 88 @ (84, 82) : Rescued person (id,life) 204 133
+Time 88 @ (84, 82) : Rescued person (id,life) 163 88
+Time 88 @ (84, 82) : Rescued person (id,life) 72 154
+Time 88 @ (84, 82) : Rescued person (id,life) 5 115
+Time 113 @ (95, 69) : Picked  232
+Time 138 @ (84, 82) : Rescued person (id,life) 232 140
+AQUI
+
+Ambulance id =  29
+Time 0 @ (60, 53) : Starting
+Time 31 @ (40, 63) : Picked  264
+Time 58 @ (16, 65) : Picked  209
+Time 80 @ (29, 57) : Picked  213
+Time 106 @ (25, 78) : Rescued person (id,life) 264 136
+Time 106 @ (25, 78) : Rescued person (id,life) 209 107
+Time 106 @ (25, 78) : Rescued person (id,life) 213 109
+AQUI
+
+Ambulance id =  30
+Time 0 @ (60, 53) : Starting
+Time 29 @ (40, 61) : Picked  223
+Time 66 @ (30, 35) : Picked  188
+Time 86 @ (25, 21) : Picked  222
+Time 97 @ (26, 12) : Picked  104
+Time 114 @ (23, 25) : Rescued person (id,life) 223 117
+Time 114 @ (23, 25) : Rescued person (id,life) 188 138
+Time 114 @ (23, 25) : Rescued person (id,life) 222 129
+Time 114 @ (23, 25) : Rescued person (id,life) 104 146
+AQUI
+
+Ambulance id =  31
+Time 0 @ (23, 25) : Starting
+Time 17 @ (15, 33) : Picked  143
+Time 28 @ (13, 41) : Picked  145
+Time 37 @ (10, 46) : Picked  26
+Time 42 @ (13, 45) : Picked  161
+Time 73 @ (23, 25) : Rescued person (id,life) 143 118
+Time 73 @ (23, 25) : Rescued person (id,life) 145 154
+Time 73 @ (23, 25) : Rescued person (id,life) 26 108
+Time 73 @ (23, 25) : Rescued person (id,life) 161 157
+Time 102 @ (4, 34) : Picked  32
+Time 111 @ (3, 27) : Picked  156
+Time 134 @ (23, 25) : Rescued person (id,life) 32 161
+Time 134 @ (23, 25) : Rescued person (id,life) 156 134
+AQUI
+
+Ambulance id =  32
+Time 0 @ (23, 25) : Starting
+Time 18 @ (26, 11) : Picked  146
+Time 31 @ (30, 3) : Picked  89
+Time 51 @ (39, 13) : Picked  180
+Time 59 @ (38, 7) : Picked  102
+Time 93 @ (23, 25) : Rescued person (id,life) 146 100
+Time 93 @ (23, 25) : Rescued person (id,life) 89 127
+Time 93 @ (23, 25) : Rescued person (id,life) 180 156
+Time 93 @ (23, 25) : Rescued person (id,life) 102 104
+Time 125 @ (42, 13) : Picked  75
+Time 157 @ (23, 25) : Rescued person (id,life) 75 158
+AQUI
+
+Ambulance id =  33
+Time 0 @ (23, 25) : Starting
+Time 23 @ (31, 39) : Picked  115
+Time 38 @ (32, 52) : Picked  218
+Time 59 @ (15, 49) : Picked  262
+Time 67 @ (16, 55) : Picked  234
+Time 100 @ (25, 78) : Rescued person (id,life) 115 110
+Time 100 @ (25, 78) : Rescued person (id,life) 218 103
+Time 100 @ (25, 78) : Rescued person (id,life) 262 132
+Time 100 @ (25, 78) : Rescued person (id,life) 234 146
+AQUI
+
+Ambulance id =  34
+Time 0 @ (23, 25) : Starting
+Time 26 @ (7, 16) : Picked  48
+Time 32 @ (7, 11) : Picked  77
+Time 38 @ (2, 11) : Picked  270
+Time 45 @ (5, 14) : Picked  203
+Time 75 @ (23, 25) : Rescued person (id,life) 48 152
+Time 75 @ (23, 25) : Rescued person (id,life) 77 141
+Time 75 @ (23, 25) : Rescued person (id,life) 270 106
+Time 75 @ (23, 25) : Rescued person (id,life) 203 132
+Time 114 @ (41, 5) : Picked  173
+Time 153 @ (23, 25) : Rescued person (id,life) 173 164
+AQUI
+
+Ambulance id =  35
+Time 0 @ (23, 25) : Starting
+Time 17 @ (25, 11) : Picked  68
+Time 37 @ (43, 12) : Picked  221
+Time 57 @ (40, 28) : Picked  241
+Time 78 @ (23, 25) : Rescued person (id,life) 68 84
+Time 78 @ (23, 25) : Rescued person (id,life) 221 80
+Time 78 @ (23, 25) : Rescued person (id,life) 241 100
+Time 101 @ (42, 22) : Picked  39
+Time 124 @ (23, 25) : Rescued person (id,life) 39 132
+AQUI
+
+Ambulance id =  36
+Time 0 @ (23, 25) : Starting
+Time 26 @ (1, 28) : Picked  85
+Time 45 @ (2, 45) : Picked  64
+Time 53 @ (6, 48) : Picked  27
+Time 61 @ (4, 43) : Picked  147
+Time 99 @ (23, 25) : Rescued person (id,life) 85 99
+Time 99 @ (23, 25) : Rescued person (id,life) 64 113
+Time 99 @ (23, 25) : Rescued person (id,life) 27 144
+Time 99 @ (23, 25) : Rescued person (id,life) 147 139
+AQUI
+
+Ambulance id =  37
+Time 0 @ (23, 25) : Starting
+Time 17 @ (15, 33) : Picked  0
+Time 37 @ (12, 49) : Picked  119
+Time 52 @ (23, 52) : Picked  275
+Time 80 @ (23, 25) : Rescued person (id,life) 0 91
+Time 80 @ (23, 25) : Rescued person (id,life) 119 80
+Time 80 @ (23, 25) : Rescued person (id,life) 275 136
+Time 128 @ (12, 61) : Picked  90
+Time 159 @ (25, 78) : Rescued person (id,life) 90 161
+AQUI
+
+Ambulance id =  38
+Time 0 @ (23, 25) : Starting
+Time 30 @ (46, 31) : Picked  230
+Time 46 @ (53, 23) : Picked  294
+Time 54 @ (49, 20) : Picked  283
+Time 62 @ (44, 18) : Picked  225
+Time 91 @ (23, 25) : Rescued person (id,life) 230 97
+Time 91 @ (23, 25) : Rescued person (id,life) 294 132
+Time 91 @ (23, 25) : Rescued person (id,life) 283 136
+Time 91 @ (23, 25) : Rescued person (id,life) 225 110
+Time 121 @ (6, 37) : Picked  261
+Time 151 @ (23, 25) : Rescued person (id,life) 261 156
+AQUI
+
+Ambulance id =  39
+Time 0 @ (23, 25) : Starting
+Time 33 @ (42, 38) : Picked  111
+Time 44 @ (34, 40) : Picked  126
+Time 71 @ (23, 25) : Rescued person (id,life) 111 103
+Time 71 @ (23, 25) : Rescued person (id,life) 126 87
+Time 95 @ (2, 27) : Picked  246
+Time 119 @ (23, 25) : Rescued person (id,life) 246 121
+AQUI
+
+Ambulance id =  40
+Time 0 @ (23, 25) : Starting
+Time 29 @ (13, 7) : Picked  114
+Time 38 @ (10, 2) : Picked  201
+Time 75 @ (23, 25) : Rescued person (id,life) 114 83
+Time 75 @ (23, 25) : Rescued person (id,life) 201 93
+Time 115 @ (8, 49) : Picked  202
+Time 155 @ (23, 25) : Rescued person (id,life) 202 159
+
+Score - Saved: 250  Died:  0
+
+250 0 
