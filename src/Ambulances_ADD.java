@@ -63,9 +63,10 @@ public class Ambulances_ADD {
   // END OF SERVER COMMUNICATION STUFF
 
   private static final int NUM_KMEANS_TRIALS = 10000;
-  private static final int ANTCOL_ITERATIONS = 100;
+  private static final int ANTCOL_ITERATIONS = 50000;
   private static final int MAX_NUMBER_VICTIMS = 300;
   private static final int MAX_NODES_FROM_CURRENT_POSITION = 5;
+  private static final int TIME_ALLOWED = 110;
 
   private static int[][] victims = new int[MAX_NUMBER_VICTIMS][3];
   private static int[] hospitals_start = new int[5];
@@ -74,10 +75,12 @@ public class Ambulances_ADD {
   private static int max_x = 100;
   private static int max_y = 100;
   private static int numberOfVictims = 0;
+  private static long startTime;
 
   public static void main(String[] args) throws IOException {
 
-    
+    startTime = System.currentTimeMillis();
+
     try {
       sock = new Socket(host, port);
       out = new PrintWriter(sock.getOutputStream(), true);
@@ -94,9 +97,9 @@ public class Ambulances_ADD {
     sendText(out, teamName);
     String data = readData(in);
     readFile(data);
-    
-    //readFile();
-    
+
+    // readFile();
+
     Random random = new Random();
     centroids = new int[hospitals_start.length][2];
 
@@ -149,6 +152,7 @@ public class Ambulances_ADD {
       }
 
       double score = 0;
+      int[] num_assignments = new int[centroids.length];
       for (int j = 0; j < centroids.length; j++) {
         double total_distances = 0;
         int members = 0;
@@ -160,19 +164,86 @@ public class Ambulances_ADD {
         }
         if (members > 0) {
           total_distances /= members;
+          num_assignments[j] = members;
         }
         score += total_distances;
       }
 
       if (score < best_score) {
         best_score = score;
-        hospitals = centroids.clone();
+        // hospitals = centroids.clone();
+        hospitals = new int[centroids.length][5];
+        // form comprehensive description of hospitals
+        for (int i = 0; i < hospitals.length; i++) {
+          hospitals[i][0] = centroids[i][0];
+          hospitals[i][1] = centroids[i][1];
+          hospitals[i][2] = num_assignments[i];
+          hospitals[i][3] = hospitals_start[i];
+          hospitals[i][4] = i;
+        }
+        // sort them in order of num of ambulances
+        for (int i = 0; i < hospitals.length; i++) {
+          for (int j = i + 1; j < hospitals.length; j++) {
+            if (hospitals[i][3] < hospitals[j][3]) {
+              int[] aux = hospitals[i];
+              hospitals[i] = hospitals[j];
+              hospitals[j] = aux;
+            }
+          }
+        }
+        // shuffle coordinates s.t. the numAssignments order matches
+        for (int i = 0; i < hospitals.length; i++) {
+          for (int j = i + 1; j < hospitals.length; j++) {
+            if (hospitals[i][2] < hospitals[j][2]) {
+              int aux = hospitals[i][0];
+              hospitals[i][0] = hospitals[j][0];
+              hospitals[j][0] = aux;
+              aux = hospitals[i][1];
+              hospitals[i][1] = hospitals[j][1];
+              hospitals[j][1] = aux;
+              aux = hospitals[i][2];
+              hospitals[i][2] = hospitals[j][2];
+              hospitals[j][2] = aux;
+            }
+          }
+        }
+        // sort them back in order of index
+        for (int i = 0; i < hospitals.length; i++) {
+          for (int j = i + 1; j < hospitals.length; j++) {
+            if (hospitals[i][4] < hospitals[j][4]) {
+              int[] aux = hospitals[i];
+              hospitals[i] = hospitals[j];
+              hospitals[j] = aux;
+            }
+          }
+        }
+
       }
     }
 
-    //System.out.println("Best score: " + best_score);
-    
-    //printMap();
+    // System.out.println("Best score: " + best_score);
+
+    // printMap();
+
+    // // PRUNING OUT WEEDS?
+    //
+    // int[][] new_victims = new int[numberOfVictims][3];
+    // int newTotal = 0;
+    // for (int i = 0; i < numberOfVictims; i++) {
+    // if (victims[i][2] >= gridDistance(
+    // hospitals[findNearstHospital(victims[i])], victims[i]) + 2) {
+    // new_victims[i] = victims[i];
+    // newTotal++;
+    // } else {
+    // System.out.println("This victims is dead meat: " + i);
+    // }
+    // }
+    // victims = new int[newTotal][3];
+    // for (int i= 0; i < victims.length; i++) {
+    // victims[i] = new_victims[i];
+    // }
+    //
+    // // END OF PRUNING
 
     ArrayList<ArrayList<Integer>> paths = runAnt();
 
@@ -181,7 +252,7 @@ public class Ambulances_ADD {
 
     String reply = readData(in);
 
-    System.out.println("Server Response\n"+reply);
+    System.out.println("Server Response\n" + reply);
 
     out.close();
     in.close();
@@ -247,7 +318,8 @@ public class Ambulances_ADD {
           hospitals.length);
     }
 
-    for (int iteration = 0; iteration < ANTCOL_ITERATIONS; iteration++) {
+    boolean keepGoing = true;
+    for (int iteration = 0; iteration < ANTCOL_ITERATIONS && keepGoing; iteration++) {
 
       boolean[] saved = new boolean[numberOfVictims];
       ArrayList<ArrayList<Integer>> listNodes = new ArrayList<ArrayList<Integer>>();
@@ -359,7 +431,12 @@ public class Ambulances_ADD {
         bestScore = totalIterationScore;
         bestSolution = listNodes;
       }
-
+      
+      long endTime = System.currentTimeMillis();
+      if(endTime - startTime > TIME_ALLOWED * 1000) {
+        keepGoing = false;
+        System.err.println("BAILING OUT FOR LACK OF TIME.");
+      }
     }
     System.err.println("Best Ant Score = " + bestScore);
     return bestSolution;
@@ -368,14 +445,13 @@ public class Ambulances_ADD {
   // =======END ANT COLONIZATION==========//
 
   private static void printOutput(ArrayList<ArrayList<Integer>> paths) {
-    //PrintStream out = System.out;
-    
+    // PrintStream out = System.out;
+
     int cont = 0;
     out.print("hospitals");
     for (int h = 0; h < hospitals.length; h++) {
-      out.print(" " + h + " (" + hospitals[h][0] + "," + hospitals[h][1]
-          + ")");
-      if(h < hospitals.length - 1)
+      out.print(" " + h + " (" + hospitals[h][0] + "," + hospitals[h][1] + ")");
+      if (h < hospitals.length - 1)
         out.print(";");
     }
     out.println();
@@ -396,7 +472,7 @@ public class Ambulances_ADD {
   }
 
   private static double distance2(int victim, int hospital) {
-    
+
     int[] point1 = victims[victim];
     int[] point2 = centroids[hospital];
 
@@ -404,23 +480,23 @@ public class Ambulances_ADD {
         + (point1[1] - point2[1]) * (point1[1] - point2[1]));
 
   }
-  
+
   private static double distance(int victim, int hospital) {
-  
-    return 2*distance2(victim, hospital);
+
+    return distance2(victim, hospital);
 
   }
-  
+
   private static void readFile() throws FileNotFoundException {
     readFile(new Scanner(new File("sample.txt")));
   }
-  
+
   private static void readFile(String data) {
     readFile(new Scanner(data));
   }
-  
+
   private static void readFile(Scanner scan) {
-    
+
     scan.nextLine();
 
     String line;
@@ -440,7 +516,8 @@ public class Ambulances_ADD {
     int i = 0;
     while (scan.hasNextLine()) {
       line = scan.nextLine();
-      if(line.isEmpty()) break;
+      if (line.isEmpty())
+        break;
       hospitals_start[i] = Integer.parseInt(line);
       i++;
     }
