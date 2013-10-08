@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -62,20 +63,21 @@ public class Ambulances_ADD {
   // END OF SERVER COMMUNICATION STUFF
 
   private static final int NUM_KMEANS_TRIALS = 10000;
-  private static final int ANTCOL_ITERATIONS = 10000;
+  private static final int ANTCOL_ITERATIONS = 100;
   private static final int MAX_NUMBER_VICTIMS = 300;
   private static final int MAX_NODES_FROM_CURRENT_POSITION = 5;
 
   private static int[][] victims = new int[MAX_NUMBER_VICTIMS][3];
   private static int[] hospitals_start = new int[5];
   private static int[][] hospitals;
+  private static int[][] centroids;
   private static int max_x = 100;
   private static int max_y = 100;
   private static int numberOfVictims = 0;
 
   public static void main(String[] args) throws IOException {
 
-    /*
+    
     try {
       sock = new Socket(host, port);
       out = new PrintWriter(sock.getOutputStream(), true);
@@ -92,11 +94,11 @@ public class Ambulances_ADD {
     sendText(out, teamName);
     String data = readData(in);
     readFile(data);
-    */
-    readFile();
+    
+    //readFile();
     
     Random random = new Random();
-    int[][] centroids = new int[hospitals_start.length][2];
+    centroids = new int[hospitals_start.length][2];
 
     double best_score = Double.MAX_VALUE;
     for (int trials = 0; trials < NUM_KMEANS_TRIALS; trials++) {
@@ -115,7 +117,7 @@ public class Ambulances_ADD {
           for (int j = 0; j < centroids.length; j++) {
             int[] centroid = centroids[j];
             int[] victim = victims[i];
-            double distance = distance(centroid, victim);
+            double distance = distance(i, j);
             if (distance < min_distance) {
               min_distance = distance;
               assignments[i] = j;
@@ -127,20 +129,22 @@ public class Ambulances_ADD {
         }
 
         for (int j = 0; j < centroids.length; j++) {
-          centroids[j][0] = 0;
-          centroids[j][1] = 0;
-          int members = 0;
+          float x = 0.0f;
+          float y = 0.0f;
+          float members = 0.0f;
           for (int i = 0; i < assignments.length; i++) {
             if (assignments[i] == j) {
-              centroids[j][0] += victims[i][0];
-              centroids[j][1] += victims[i][1];
-              members++;
+              x += victims[i][0] * (1.0f / victims[i][2]);
+              y += victims[i][1] * (1.0f / victims[i][2]);
+              members += (1.0 / victims[i][2]);
             }
           }
           if (members > 0) {
-            centroids[j][0] /= members;
-            centroids[j][1] /= members;
+            x /= members;
+            y /= members;
           }
+          centroids[j][0] = Math.round(x);
+          centroids[j][1] = Math.round(y);
         }
       }
 
@@ -150,7 +154,7 @@ public class Ambulances_ADD {
         int members = 0;
         for (int i = 0; i < assignments.length; i++) {
           if (assignments[i] == j) {
-            total_distances += distance(centroids[j], victims[i]);
+            total_distances += distance(i, j) / victims[i][2];
             members++;
           }
         }
@@ -159,7 +163,6 @@ public class Ambulances_ADD {
         }
         score += total_distances;
       }
-      // System.out.println(score);
 
       if (score < best_score) {
         best_score = score;
@@ -167,14 +170,22 @@ public class Ambulances_ADD {
       }
     }
 
-    System.out.println("Best score: " + best_score);
-
+    //System.out.println("Best score: " + best_score);
+    
     //printMap();
-    return;
-    //ArrayList<ArrayList<Integer>> paths = runAnt();
 
-    //System.out.println("");
-    //printOutput(paths);
+    ArrayList<ArrayList<Integer>> paths = runAnt();
+
+    printOutput(paths);
+    sendText(out, endofmsg);
+
+    String reply = readData(in);
+
+    System.out.println("Server Response\n"+reply);
+
+    out.close();
+    in.close();
+    sock.close();
 
   }
 
@@ -350,40 +361,53 @@ public class Ambulances_ADD {
       }
 
     }
-    System.out.println("Best Ant Score = " + bestScore);
+    System.err.println("Best Ant Score = " + bestScore);
     return bestSolution;
   }
 
   // =======END ANT COLONIZATION==========//
 
   private static void printOutput(ArrayList<ArrayList<Integer>> paths) {
+    //PrintStream out = System.out;
+    
     int cont = 0;
-    System.out.print("hospitals");
+    out.print("hospitals");
     for (int h = 0; h < hospitals.length; h++) {
-      System.out.print(" " + h + " (" + hospitals[h][0] + "," + hospitals[h][1]
-          + ");");
+      out.print(" " + h + " (" + hospitals[h][0] + "," + hospitals[h][1]
+          + ")");
+      if(h < hospitals.length - 1)
+        out.print(";");
     }
-    System.out.println("");
+    out.println();
     for (ArrayList<Integer> ambulance : paths) {
-      System.out.print("ambulance " + (cont++));
+      out.print("ambulance " + (cont++));
       for (int node : ambulance) {
         if (node >= 0) {
-          System.out.print(" " + node + " (" + victims[node][0] + ","
+          out.print(" " + node + " (" + victims[node][0] + ","
               + victims[node][1] + "," + victims[node][2] + ");");
         } else {
           int hospital = (node * (-1)) - 1;
-          System.out.print(" (" + hospitals[hospital][0] + ","
+          out.print(" (" + hospitals[hospital][0] + ","
               + hospitals[hospital][1] + ");");
         }
       }
-      System.out.println("");
+      out.println();
     }
   }
 
-  private static double distance(int[] point1, int[] point2) {
+  private static double distance2(int victim, int hospital) {
+    
+    int[] point1 = victims[victim];
+    int[] point2 = centroids[hospital];
 
     return Math.sqrt((point1[0] - point2[0]) * (point1[0] - point2[0])
         + (point1[1] - point2[1]) * (point1[1] - point2[1]));
+
+  }
+  
+  private static double distance(int victim, int hospital) {
+  
+    return 2*distance2(victim, hospital);
 
   }
   
@@ -416,6 +440,7 @@ public class Ambulances_ADD {
     int i = 0;
     while (scan.hasNextLine()) {
       line = scan.nextLine();
+      if(line.isEmpty()) break;
       hospitals_start[i] = Integer.parseInt(line);
       i++;
     }
