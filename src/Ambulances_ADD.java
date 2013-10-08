@@ -80,6 +80,9 @@ public class Ambulances_ADD {
   public static void main(String[] args) throws IOException {
 
     startTime = System.currentTimeMillis();
+    if (!args[0].isEmpty()) {
+      port = Integer.parseInt(args[0]);
+    }
 
     try {
       sock = new Socket(host, port);
@@ -431,11 +434,11 @@ public class Ambulances_ADD {
         bestScore = totalIterationScore;
         bestSolution = listNodes;
       }
-      
+
       long endTime = System.currentTimeMillis();
-      if(endTime - startTime > TIME_ALLOWED * 1000) {
+      if (endTime - startTime > TIME_ALLOWED * 1000) {
         keepGoing = false;
-        System.err.println("BAILING OUT FOR LACK OF TIME.");
+        System.err.println("BAILING OUT FOR LACK OF TIME:" + ((endTime - startTime)/1000) + "sec");
       }
     }
     System.err.println("Best Ant Score = " + bestScore);
@@ -469,6 +472,7 @@ public class Ambulances_ADD {
       }
       out.println();
     }
+    out.flush();
   }
 
   private static double distance2(int victim, int hospital) {
