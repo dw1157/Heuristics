@@ -2,12 +2,17 @@ import java.util.*;
 
 public class VoronoiADD {
 	
+	//TODO connection with server
+	//TODO symmetry algorithm
+	//TODO draw honeycomb
+	
 	final static int TOTALPLAYERS = 2;
 	final static int MAXSTONES = 4;
 	final static int BOARDSIZE = 1000;
 	
 	static int[][][] stones = new int[TOTALPLAYERS][MAXSTONES][2];
 	static int[] playersNumMoves = new int[TOTALPLAYERS];
+	static int[][] board = new int[BOARDSIZE][BOARDSIZE]; // used in BFS	
 	
 	public static void main(String args[]){
 		stones[0][playersNumMoves[0]][0] = 500; 
@@ -26,26 +31,19 @@ public class VoronoiADD {
 		stones[1][playersNumMoves[1]][1] = 520;
 		playersNumMoves[1]++;
 		
-		for(int a= 0; a < BOARDSIZE; a++){
-			for(int b= 0; b < BOARDSIZE; b++){
-				board[a][b] = -1; // remove all colors
-			}
-		}
-		BFS(1, 0, 1);
-		BFS(1, 1, 1);
-		printBoard(1);
 		long ini = System.currentTimeMillis();
 		int[] bestMove=  greedyRandom(1);
 		System.out.println("best greedy move is: y = " + bestMove[0] + " and x = " + bestMove[1]);
 		System.out.println("total time = " + ( System.currentTimeMillis() - ini));
 		
+		
+		stones[1][playersNumMoves[1]][0] = bestMove[0]; 
+		stones[1][playersNumMoves[1]][1] = bestMove[1];
 		for(int a= 0; a < BOARDSIZE; a++){
 			for(int b= 0; b < BOARDSIZE; b++){
 				board[a][b] = -1; // remove all colors
 			}
 		}
-		stones[1][playersNumMoves[1]][0] = bestMove[0]; 
-		stones[1][playersNumMoves[1]][1] = bestMove[1];
 		playersNumMoves[1]++;
 		BFS(1, 0, 1);
 		BFS(1, 1, 1);
@@ -83,7 +81,6 @@ public class VoronoiADD {
 			for(int iteration= 0; iteration < random ; iteration++){
 				int y = begin[1] + (int) (Math.random() * (end[1] - begin[1]));
 				int x = begin[0] + (int) (Math.random() * (end[0] - begin[0]));
-				//System.out.println("("+depth+","+iteration+") best point : y = " +  bestPoint[0] + " and x = " + bestPoint[1] + " with area = " + bestArea);
 				
 				for(int a= 0; a < BOARDSIZE; a++){
 					for(int b= 0; b < BOARDSIZE; b++){
@@ -101,7 +98,6 @@ public class VoronoiADD {
 				stones[currentPlayer][pos][0] = 0;
 				stones[currentPlayer][pos][1] = 0;
 				playersNumMoves[currentPlayer]--;
-				//System.out.println("iterations num = " + iterations + " " + area);
 				if( area > bestArea){
 					bestArea = area;
 					bestPoint[0] = y; bestPoint[1] = x;
@@ -126,8 +122,6 @@ public class VoronoiADD {
 		System.err.println("best area = " + bestArea);
 		return ret;	
 	}
-	
-	static int[][] board = new int[BOARDSIZE][BOARDSIZE];
 	
 	public static void printBoard(int currentPlayer){
 		for(int i = 0; i< BOARDSIZE; i++){
