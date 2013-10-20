@@ -10,11 +10,20 @@ public class VoronoiADD {
 	static int[] playersNumMoves = new int[TOTALPLAYERS];
 	
 	public static void main(String args[]){
-		// place a stone of the first player in posisition (30,30);
-		stones[0][0][0] = 30; 
-		stones[0][0][1] = 30;
-		playersNumMoves[0] = 1;
+		stones[0][0][0] = 500; 
+		stones[0][0][1] = 500;
+		stones[0][0][0] = 750; 
+		stones[0][0][1] = 750;
+		stones[0][0][0] = 300; 
+		stones[0][0][1] = 300;
+		playersNumMoves[0] = 3;
 
+		stones[0][1][0] = 510; 
+		stones[0][1][1] = 510;
+		stones[0][1][0] = 750; 
+		stones[0][1][1] = 710;
+		playersNumMoves[1] = 2;
+		
 		long ini = System.currentTimeMillis();
 		int[] bestMove=  greedyRandom(1);
 		System.out.println("best greedy move is: y = " + bestMove[0] + " and x = " + bestMove[1]);
@@ -38,8 +47,8 @@ public class VoronoiADD {
 	 */
 	public static int[] greedyRandom(int currentPlayer){
 		int[] ret = new int[2];
-		int depth = 3;
-		int random = 64;
+		int depth = 7;
+		int random = 100;
 		
 		int[] begin = new int[]{0, 0};
 		int[] end = new int[]{BOARDSIZE, BOARDSIZE};
@@ -52,7 +61,7 @@ public class VoronoiADD {
 			for(int i= 0; i < random ; i++){
 				int y = begin[1] + (int) (Math.random() * (end[1] - begin[1]));
 				int x = begin[0] + (int) (Math.random() * (end[0] - begin[0]));
-				System.out.println("("+depth+","+i+") best point : y = " +  bestPoint[0] + " and x = " + bestPoint[1] + " with area = " + bestArea);
+				//System.out.println("("+depth+","+i+") best point : y = " +  bestPoint[0] + " and x = " + bestPoint[1] + " with area = " + bestArea);
 				int[] placeStone  = new int[]{y,x};
 				Queue<int[]> queue = new LinkedList<int[]>();
 				// run BFS to find the new points pulled by this stone
@@ -102,7 +111,7 @@ public class VoronoiADD {
 					}
 					
 				}
-				System.out.println("iterations num = " + iterations + " " + area);
+				//System.out.println("iterations num = " + iterations + " " + area);
 				if( area > bestArea){
 					bestArea = area;
 					bestPoint[0] = y; bestPoint[1] = x;
@@ -110,18 +119,21 @@ public class VoronoiADD {
 			}
 			int dy = (end[0] - begin[0])/2;
 			int dx = (end[1] - begin[1])/2;
-			if(bestPoint[0] < end[0]/2 && bestPoint[1] < end[1]/2){ // top left corner
+			int middley = begin[0] + end[0]/2;
+			int middlex = begin[1] + end[1]/2;
+			if(bestPoint[0] < middley && bestPoint[1] < middlex ){ // top left corner
 				end[0] -= dy; end[1] -= dx;
-			} else if( bestPoint[0] < end[0]/2 && bestPoint[1] >= end[1]/2){ //top right corner 
+			} else if( bestPoint[0] < middley && bestPoint[1] >= middlex){ //top right corner 
 				end[0] -= dy; begin[1] += dx;
-			} else if(bestPoint[0] < end[0]/2 && bestPoint[1] < end[1]/2){ //bottom left corner
+			} else if(bestPoint[0] >= middley && bestPoint[1] < middlex){ //bottom left corner
 				begin[0] += dy; end[1] -= dx;
 			} else { // bottom right corner
 				begin[0] += dy; begin[1] += dx;
 			}
+			//System.out.println("begin and end = (" + begin[0] + "," + begin[1] + ") _ (" + end[0] + "," + end[1] + ')' );
 			ret = Arrays.copyOf(bestPoint, 2);
 		}
-		
+		System.out.println("best area = " + bestArea);
 		return ret;	
 	}
 	
