@@ -3,32 +3,34 @@ import java.util.*;
 public class VoronoiADD {
 	
 	final static int TOTALPLAYERS = 2;
-	final static int MAXSTONES = 2;
-	final static int BOARDSIZE = 100;
+	final static int MAXSTONES = 4;
+	final static int BOARDSIZE = 1000;
 	
 	static int[][][] stones = new int[TOTALPLAYERS][MAXSTONES][2];
 	static int[] playersNumMoves = new int[TOTALPLAYERS];
 	
 	public static void main(String args[]){
-		// place a stone of the first player in posisition (0,0);
+		// place a stone of the first player in posisition (30,30);
 		stones[0][0][0] = 30; 
 		stones[0][0][1] = 30;
 		playersNumMoves[0] = 1;
-		
+
+		long ini = System.currentTimeMillis();
 		int[] bestMove=  greedyRandom(1);
-		System.err.println("best greedy move is: y = " + bestMove[0] + " and x = " + bestMove[1]);
+		System.out.println("best greedy move is: y = " + bestMove[0] + " and x = " + bestMove[1]);
+		System.out.println("total time = " + ( System.currentTimeMillis() - ini));
 	}
 	
 	public static double euclidianDistance(int[] a, int[] b){
 		return Math.sqrt( (a[0] - b[0]) * (a[0] - b[0]) +  (a[1] - b[1]) * (a[1] - b[1]) );
 	}
-	
+
 	
 	/**
-	 * Uses a greedy algorithm to select where to place the stone for the current player. 
+	 * Uses a greedy algorithm to select where to place the stone for the current player.
 	 * Uses a random approach to find the point such that the total area is maximized
 	 * Assumes that the point (y,x) is represented as int[0] = y and int[1] = x;
-	 * Tested and seems to be too slow
+	 * Is quite slow because the board is too big
 	 * 
 	 * @param currentPlayer , probably our player ID, but the algorithm can also be run to find the best 
 	 * position to a general player
@@ -37,34 +39,34 @@ public class VoronoiADD {
 	public static int[] greedyRandom(int currentPlayer){
 		int[] ret = new int[2];
 		int depth = 3;
-		int random = 256;
+		int random = 64;
 		
 		int[] begin = new int[]{0, 0};
 		int[] end = new int[]{BOARDSIZE, BOARDSIZE};
 		
 		boolean[][] mark = new boolean[BOARDSIZE][BOARDSIZE];
+		int bestArea = 0; int[] bestPoint = new int[2];
 		
-		while(depth-- > 0){
-			
-			int bestArea = 0; int[] bestPoint = new int[2];
+		while(depth-- > 0){	
 			
 			for(int i= 0; i < random ; i++){
 				int y = begin[1] + (int) (Math.random() * (end[1] - begin[1]));
 				int x = begin[0] + (int) (Math.random() * (end[0] - begin[0]));
+				System.out.println("("+depth+","+i+") best point : y = " +  bestPoint[0] + " and x = " + bestPoint[1] + " with area = " + bestArea);
 				int[] placeStone  = new int[]{y,x};
 				Queue<int[]> queue = new LinkedList<int[]>();
 				// run BFS to find the new points pulled by this stone
 				queue.add(placeStone);
 				int area = 0;
-				for(int a= begin[0]; a < end[0]; a++){
-					for(int b= begin[1]; b < end[1]; b++){
+				for(int a= 0; a < BOARDSIZE; a++){
+					for(int b= 0; b < BOARDSIZE; b++){
 						mark[a][b] = false;
 					}
 				}
+				int iterations= 0;
 				while(!queue.isEmpty()){
+					iterations++;
 					int[] point = queue.poll();
-					if(mark[point[0]][point[1]]) continue;
-					mark[point[0]][point[1]] = true;
 					double biggestPull = 0; int pointColor = -1;
 					
 					for( int player = 0; player < TOTALPLAYERS; player++){
@@ -90,15 +92,17 @@ public class VoronoiADD {
 	
 								if( (dy != 1 || dx != 1) && 
 										(point[0]+dy) >= 0 && (point[0]+dy) < BOARDSIZE && 
-											(point[1]+dx) >= 0 &&  (point[1]+dx) < BOARDSIZE){
+											(point[1]+dx) >= 0 &&  (point[1]+dx) < BOARDSIZE &&
+												!mark[point[0]+dy][point[1]+dx]){
 									queue.add(new int[]{point[0]+dy, point[1]+dx});
+									mark[point[0]+dy][point[1]+dx] = true;
 								}
 							}
 						}
 					}
 					
 				}
-				
+				System.out.println("iterations num = " + iterations + " " + area);
 				if( area > bestArea){
 					bestArea = area;
 					bestPoint[0] = y; bestPoint[1] = x;
@@ -116,7 +120,6 @@ public class VoronoiADD {
 				begin[0] += dy; begin[1] += dx;
 			}
 			ret = Arrays.copyOf(bestPoint, 2);
-			random /= 2;
 		}
 		
 		return ret;	
